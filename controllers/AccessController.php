@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Note;
-use app\models\search\NoteSearch;
+use app\models\Access;
+use app\models\search\AccessSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * NoteController implements the CRUD actions for Note model.
+ * AccessController implements the CRUD actions for Access model.
  */
-class NoteController extends Controller
+class AccessController extends Controller
 {
     public function behaviors()
     {
@@ -27,29 +27,13 @@ class NoteController extends Controller
     }
 
     /**
-     * Lists all Note models.
+     * Lists all Access models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new NoteSearch();
-        $dataProvider = $searchModel->search(
-            Yii::$app->request->queryParams
-        );
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionMynotes()
-    {
-        $searchModel = new NoteSearch();
-        $dataProvider = $searchModel->search([
-            'creator' => Yii::$app->user->id,
-            Yii::$app->request->queryParams
-        ]);
+        $searchModel = new AccessSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -58,7 +42,7 @@ class NoteController extends Controller
     }
 
     /**
-     * Displays a single Note model.
+     * Displays a single Access model.
      * @param integer $id
      * @return mixed
      */
@@ -70,13 +54,13 @@ class NoteController extends Controller
     }
 
     /**
-     * Creates a new Note model.
+     * Creates a new Access model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Note();
+        $model = new Access();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -88,7 +72,7 @@ class NoteController extends Controller
     }
 
     /**
-     * Updates an existing Note model.
+     * Updates an existing Access model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -107,7 +91,7 @@ class NoteController extends Controller
     }
 
     /**
-     * Deletes an existing Note model.
+     * Deletes an existing Access model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -120,15 +104,15 @@ class NoteController extends Controller
     }
 
     /**
-     * Finds the Note model based on its primary key value.
+     * Finds the Access model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Note the loaded model
+     * @return Access the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Note::findOne($id)) !== null) {
+        if (($model = Access::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
