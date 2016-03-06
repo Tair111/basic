@@ -28,7 +28,7 @@ class Note extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text'                                                                            ], 'required'],
+            [['text'], 'required'],
             [['text'], 'string'],
             [['creator'], 'integer'],
             [['date_create'], 'safe']
